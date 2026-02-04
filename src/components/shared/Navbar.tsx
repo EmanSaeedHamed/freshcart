@@ -1,9 +1,8 @@
 'use client'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faBars, faCartShopping, faMagnifyingGlass, faPerson, faPhone, faRightFromBracket, faUserPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { faAddressCard, faHeart, faUser} from "@fortawesome/free-regular-svg-icons";
+import { faAddressCard, faHeart, faUser, faEnvelope} from "@fortawesome/free-regular-svg-icons";
 import Link from "next/link";
-import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { usePathname } from "next/navigation";
 import navLogo from '../../assets/images/mini-logo.png';
 import Image from 'next/image';
