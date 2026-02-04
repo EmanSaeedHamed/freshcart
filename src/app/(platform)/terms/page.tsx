@@ -1,8 +1,8 @@
-
 export default function page() {
-  return (
+  return 
     <>
-    <h2>home</h2>
+    <h2>
+        terms
+    </h2>
     </>
-  )
 }
