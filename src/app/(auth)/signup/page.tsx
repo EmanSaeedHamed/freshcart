@@ -1,9 +1,8 @@
+import SignupScreen from "@/features/auth/screens/signup.screen";
 export default function page() {
   return (
       <>
-    <h2>
-        sign up
-    </h2>
+     <SignupScreen/>
     </>
     )
 }

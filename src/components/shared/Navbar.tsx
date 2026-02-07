@@ -1,6 +1,6 @@
 'use client'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faBars, faCartShopping, faMagnifyingGlass, faPerson, faPhone, faRightFromBracket, faUserPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faBabyCarriage, faBars, faBolt, faBriefcaseMedical, faCartShopping, faCircle, faEllipsis, faMagnifyingGlass, faPerson, faPersonDress, faPhone, faRightFromBracket, faUserPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faAddressCard, faHeart, faUser, faEnvelope} from "@fortawesome/free-regular-svg-icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -15,7 +15,7 @@ export default function Navbar() {
   }
   return (
     <>
-      <header>
+      <header className="fixed top-0 left-0 right-0 z-30 bg-white shadow-md">
         <div className="container text-sm">
            {/* top navbar */}
         <div className="hidden lg:flex justify-between items-center py-1 border-b border-b-gray-300/70">
@@ -72,7 +72,7 @@ export default function Navbar() {
         <nav className="flex justify-between items-center py-3">
           <h1 className="text-primary-600 font-bold text-2xl">
             <Link href={'/'} className="flex items-center">
-             <Image className="size-6" src={navLogo} alt="logo cart"/>
+             <Image className="w-7 object-center" src={navLogo} alt="logo cart"/>
               <span>Fresh</span>
             <span className="text-black">Cart</span>
             </Link>
@@ -142,39 +142,39 @@ export default function Navbar() {
             <div className="absolute rounded-md shadow-xl top-10 left-0 bg-white min-w-48 hidden group-hover:block">
               <ul className="*:py-1 *:hover:bg-gray-100 *:transition-colors *:duration-200">
                 <li className="px-2 border-b border-gray-300">
-                  <Link className="flex items-center" href={'/'}>
+                  <Link className="flex items-center gap-2" href={'/'}>
                     <FontAwesomeIcon className="w-4 h-4 text-primary-600" icon={faPerson} />
                     <span>Men's Fashion</span>
                   </Link>
                 </li>
                 <li className="px-2 border-b border-gray-300">
-                  <Link className="flex items-center" href={'/'}>
-                    <FontAwesomeIcon className="w-4 h-4 text-primary-600" icon={faPerson} />
-                    <span>Men's Fashion</span>
+                  <Link className="flex items-center gap-2" href={'/'}>
+                    <FontAwesomeIcon className="w-4 h-4 text-primary-600" icon={faPersonDress} />
+                    <span>Women's Fashion</span>
                   </Link>
                 </li>
                 <li className="px-2 border-b border-gray-300">
-                  <Link className="flex items-center" href={'/'}>
-                    <FontAwesomeIcon className="w-4 h-4 text-primary-600" icon={faPerson} />
-                    <span>Men's Fashion</span>
+                  <Link className="flex items-center gap-2" href={'/'}>
+                    <FontAwesomeIcon className="w-4 h-4 text-primary-600" icon={faBabyCarriage} />
+                    <span>Baby & Toys</span>
                   </Link>
                 </li>
                 <li className="px-2 border-b border-gray-300">
-                  <Link className="flex items-center" href={'/'}>
-                    <FontAwesomeIcon className="w-4 h-4 text-primary-600" icon={faPerson} />
-                    <span>Men's Fashion</span>
+                  <Link className="flex items-center gap-2" href={'/'}>
+                    <FontAwesomeIcon className="w-4 h-4 text-primary-600" icon={faBriefcaseMedical} />
+                    <span>Beauty & Health</span>
                   </Link>
                 </li>
                 <li className="px-2 border-b border-gray-300">
-                  <Link className="flex items-center" href={'/'}>
-                    <FontAwesomeIcon className="w-4 h-4 text-primary-600" icon={faPerson} />
-                    <span>Men's Fashion</span>
+                  <Link className="flex items-center gap-2" href={'/'}>
+                    <FontAwesomeIcon className="w-4 h-4 text-primary-600" icon={faBolt} />
+                    <span>Electronics</span>
                   </Link>
                 </li>
                 <li className="px-2">
-                  <Link className="flex items-center" href={'/'}>
-                    <FontAwesomeIcon className="w-4 h-4 text-primary-600" icon={faPerson} />
-                    <span>Men's Fashion</span>
+                  <Link className="flex items-center gap-2" href={'/'}>
+                    <FontAwesomeIcon className="w-4 h-4 text-primary-600" icon={faEllipsis} />
+                    <span>View All Categories</span>
                   </Link>
                 </li>
               </ul>
