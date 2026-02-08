@@ -16,14 +16,14 @@ export default function SignupHero() {
         FreshCart
         </span>
       </h2>
-      <p className="font- text-[18px]">
+      <p className="text-[18px]">
         Join thousands of happy customers who enjoy fresh groceries delivered right to their doorstep.
       </p>
     </div>
     {/* icons */}
     <ul className="space-y-4">
       <li className="flex items-center gap-3">
-        <div className="icon size-11 *:text-primary-600 rounded-full flex justify-center items-center border border-gray-400/40">
+        <div className="icon size-11 shrink-0 *:text-primary-600 rounded-full flex justify-center items-center border border-gray-400/40">
           <FontAwesomeIcon icon={faStar} />
         </div>
         {/* content */}
@@ -37,7 +37,7 @@ export default function SignupHero() {
         </div>
       </li>
       <li className="flex items-center gap-3">
-        <div className="icon size-11 *:text-primary-600 rounded-full flex justify-center items-center border border-gray-400/40">
+        <div className="icon size-11 shrink-0 *:text-primary-600 rounded-full flex justify-center items-center border border-gray-400/40">
           <FontAwesomeIcon icon={faTruckFast} />
         </div>
         {/* content */}
@@ -51,7 +51,7 @@ export default function SignupHero() {
         </div>
       </li>
       <li className="flex items-center gap-3">
-        <div className="icon size-11 *:text-primary-600 rounded-full flex justify-center items-center border border-gray-400/40">
+        <div className="icon size-11 shrink-0 *:text-primary-600 rounded-full flex justify-center items-center border border-gray-400/40">
           <FontAwesomeIcon icon={faShieldHalved} />
         </div>
         {/* content */}
