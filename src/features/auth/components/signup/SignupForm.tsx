@@ -33,7 +33,7 @@ export default function SignupForm() {
      <div className="px-4 lg:px-12 rounded-xl shadow-lg py-8 space-y-10 bg-white">
       {/* heading */}
       <div className="text-center">
-        <div className="icon mx-auto size-15 *:text-xl *:text-primary-600 rounded-full flex justify-center items-center border border-gray-400/40">
+        <div className="icon mx-auto size-15 shrink-0 *:text-xl *:text-primary-600 rounded-full flex justify-center items-center border border-gray-400/40">
           <FontAwesomeIcon icon={faUserPlus} />
         </div>
         <h2 className="text-2xl font-semibold">
@@ -98,7 +98,7 @@ export default function SignupForm() {
             <span>I agree to the</span>
             <Link className="text-primary-600 hover:underline" href={'/terms'}>Terms of Service</Link>
             <span>and</span>
-            <Link className="text-primary-600 hover:underline" href={'/privacy-policy'}>Privacy Policy</Link>
+            <Link className="text-primary-600 hover:underline" href={'/privacy-policy'}>Privacy Policy.</Link>
           </label>
         </div>
         {errors.terms && <p className="text-red-500">{errors.terms.message}</p>}

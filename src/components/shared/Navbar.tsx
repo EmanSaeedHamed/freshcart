@@ -205,7 +205,7 @@ export default function Navbar() {
       {openNavMenu && <>
         <div onClick={toggleNavbarMenu} className="fixed lg:hidden inset-0 bg-black/50 z-30 cursor-pointer">
       </div>
-      <div className="offCanvas lg:hidden animate-slide-in fixed space-y-6 z-40 top-0 bottom-0 bg-white px-2 py-3">
+      <div className="offCanvas lg:hidden animate-slide-in fixed flex flex-col gap-6 z-40 top-0 bottom-0 bg-white px-2 py-3">
            <div className="flex items-center justify-between border-b border-b-gray-400/40 pb-3">
             <h2 className="text-primary-600 font-bold text-xl">
             <Link href={'/'} className="flex items-center">
@@ -214,7 +214,7 @@ export default function Navbar() {
             <span className="text-black">Cart</span>
             </Link>
           </h2>
-          <div onClick={toggleNavbarMenu} className="btn cursor-pointer rounded-full size-7 bg-primary-600 text-white flex justify-center items-center">
+          <div onClick={toggleNavbarMenu} className="btn cursor-pointer size-7 bg-primary-600 text-white flex justify-center items-center">
             <FontAwesomeIcon icon={faXmark} />
           </div>
            </div>

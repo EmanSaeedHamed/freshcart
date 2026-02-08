@@ -86,7 +86,7 @@ export default function SignupHero() {
           </div>
         </div>
       </div>
-      <blockquote className="italic text-gray-600">
+      <blockquote className="italic text-gray-600 text-sm">
         <p>
           "FreshCart has transformed my shopping experience. The quality of the products is outstanding, and the delivery is always on time. Highly recommend!"
         </p>
