@@ -15,10 +15,8 @@ export default function Navbar() {
   }
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-30 bg-white shadow-md">
-        <div className="container text-sm">
            {/* top navbar */}
-        <div className="hidden lg:flex justify-between items-center py-1 border-b border-b-gray-300/70">
+        <div className="hidden lg:flex justify-between items-center container text-sm py-1 border-b border-b-gray-300/70">
           <ul className="flex items-center gap-5">
             <li>
               <a className="flex items-center gap-1 hover:text-primary-600 transition-colors duration-200" href="tel:+1(800)123-4587">
@@ -69,7 +67,8 @@ export default function Navbar() {
         </div>
 
         {/* main navbar  */}
-        <nav className="flex justify-between items-center py-3">
+        <div className="sticky top-0 z-40 bg-white shadow-lg">
+          <nav className="flex justify-between items-center py-3 container">
           <h1 className="text-primary-600 font-bold text-2xl">
             <Link href={'/'} className="flex items-center">
              <Image className="w-7 object-center" src={navLogo} alt="logo cart"/>
@@ -128,9 +127,7 @@ export default function Navbar() {
             
           </div>
         </nav>
-        </div>
-       
-       {/* categories navbar */}
+        {/* categories navbar */}
         <nav className="hidden lg:block bg-gray-100 py-2">
           <div className="container flex items-center gap-8">
             <div className="relative group">
@@ -199,8 +196,9 @@ export default function Navbar() {
             </ul>
           </div>
         </nav>
-      </header>
 
+        </div>
+       
       {/* offCanvas */}
       {openNavMenu && <>
         <div onClick={toggleNavbarMenu} className="fixed lg:hidden inset-0 bg-black/50 z-30 cursor-pointer">

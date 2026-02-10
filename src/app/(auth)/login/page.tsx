@@ -1,9 +1,8 @@
+import LoginScreen from "@/features/auth/screens/login.screen";
 export default function page() {
   return (
      <>
-    <h2>
-        login
-    </h2>
+         <LoginScreen/>
     </>
    )
 }

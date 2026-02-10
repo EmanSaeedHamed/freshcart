@@ -1,16 +1,21 @@
 'use client';
 import { faFacebookF, faGoogle, faXTwitter } from "@fortawesome/free-brands-svg-icons";
-import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod"
 import { SignupFormValue, signupSchema } from "../../schemas/signup.schema";
+import signupAction from "../../server/signup.actions";
+import { toast } from "react-toastify";
+import {useRouter} from "next/navigation";
 
 export default function SignupForm() {
+  const router = useRouter();
   const {register,
          handleSubmit,
-         formState: {errors}
+         setError,
+         formState: {errors, isSubmitting}
         } = useForm<SignupFormValue>({
     defaultValues:{
       name: "",
@@ -24,8 +29,23 @@ export default function SignupForm() {
     mode:"onChange" ,
     reValidateMode: "onChange",
   });
-  const onSubmit:SubmitHandler<SignupFormValue> = (values)=>{
-    console.log(values);
+  const onSubmit:SubmitHandler<SignupFormValue> = async(values)=>{
+   try {
+     
+   const response = await signupAction(values);
+   console.log(response);
+   if(response?.success){
+    toast.success(response.message);
+    setTimeout(()=>{router.push("/login");},2000)
+   }
+   if(response?.signupServerErrors){
+    Object.keys(response.signupServerErrors).forEach((key)=>{
+      setError(key as keyof SignupFormValue,{message: response.signupServerErrors[key]})
+    })
+   }
+   } catch (error) {
+    
+   }
     
   }
   return <>
@@ -43,7 +63,7 @@ export default function SignupForm() {
           <span>
             Already have an account?
             </span> 
-          <Link href={'/login'} className="text-primary-600 hover:underline">
+          <Link href={'/login'} className="text-primary-500 hover:text-primary-600">
            Sign In
           </Link>
         </p>
@@ -96,17 +116,23 @@ export default function SignupForm() {
           <input {...register('terms')} type="checkbox" id="term" className="accent-primary-500 size-4 shrink-0 mt-1" />
           <label htmlFor="term" className="space-x-1">
             <span>I agree to the</span>
-            <Link className="text-primary-600 hover:underline" href={'/terms'}>Terms of Service</Link>
+            <Link className="text-primary-500 hover:text-primary-600" href={'/terms'}>Terms of Service</Link>
             <span>and</span>
-            <Link className="text-primary-600 hover:underline" href={'/privacy-policy'}>Privacy Policy.</Link>
+            <Link className="text-primary-500 hover:text-primary-600" href={'/privacy-policy'}>Privacy Policy.</Link>
           </label>
         </div>
         {errors.terms && <p className="text-red-500">{errors.terms.message}</p>}
         </div>
         {/* register btn */}
         <div className="flex justify-center">
-          <button type="submit" className=" text-white bg-primary-500 hover:bg-primary-600/90 btn w-1/2">
-          Register
+          <button disabled={isSubmitting} type="submit" className="flex items-center justify-center gap-2 py-2.5 text-white bg-primary-500 hover:bg-primary-600/90 btn disabled:cursor-not-allowed disabled:bg-primary-600/90">
+             {isSubmitting? (<>
+                <FontAwesomeIcon icon={faSpinner} spin />
+             <span>Creating An Account</span>
+             </>) : (<>
+                 <FontAwesomeIcon icon={faUserPlus} />
+             <span>Create My Account</span>
+             </>)}
         </button>
         </div>
       </form>
