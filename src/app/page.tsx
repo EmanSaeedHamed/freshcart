@@ -1,8 +1,7 @@
+import HomeScreen from "@/features/home/screens/home.screen";
 
 export default function page() {
-  return (
-    <>
-    <h2>home</h2>
-    </>
-  )
+  return <>
+               <HomeScreen/>
+         </>
 }

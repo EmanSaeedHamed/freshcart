@@ -130,11 +130,29 @@ export default function Navbar() {
             </>}
           </ul>
 
-          {/* menu button */}
-          <div onClick={toggleNavbarMenu} className="lg:hidden btn bg-primary-600 text-white cursor-pointer">
+            <div className="lg:hidden flex items-center gap-3">
+              <ul className="flex items-center gap-3">
+                <li>
+              <Link className={`${path == "/wishlist" ? "text-primary-600" : ""} hover:text-primary-600 transition-colors duration-200`} href={'/wishlist'}>
+              <FontAwesomeIcon className="text-xl" icon={faHeart} />
+              </Link>
+            </li>
+            <li className="relative">
+              <Link className={`${path == "/cart" ? "text-primary-600" : ""} hover:text-primary-600 transition-colors duration-200`} href={'/cart'}>
+              <FontAwesomeIcon className="text-xl" icon={faCartShopping} />
+              </Link>
+              <div className="flex justify-center items-center bg-primary-500 size-4 rounded-full absolute right-0 top-0 -translate-y-2">
+                <span className="text-white">3</span>
+              </div>
+            </li>
+              </ul>
+            {/* menu button */}
+          <div onClick={toggleNavbarMenu} className="btn bg-primary-600 text-white cursor-pointer">
             {openNavMenu ? <FontAwesomeIcon icon={faXmark}/> : <FontAwesomeIcon icon={faBars} />}
             
           </div>
+            </div>
+          
         </nav>
         {/* categories navbar */}
         <nav className="hidden lg:block bg-gray-100 py-2">
@@ -264,7 +282,7 @@ export default function Navbar() {
               <span>Logout</span>
             </li>:
                 <>
-                      <li className="hover:bg-primary-100 p-1 transition-colors duration-200">
+                 <li className="hover:bg-primary-100 p-1 transition-colors duration-200">
               <Link className={`${path == "/signup" ? "text-primary-600" : ""} flex gap-2 items-center hover:text-primary-600 transition-colors duration-200`} href={'/signup'}>
               <FontAwesomeIcon className="size-4" icon={faUserPlus} />
                  <span>Sign up</span>
