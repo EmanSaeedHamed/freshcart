@@ -3,39 +3,26 @@ import "../styles/globals.css";
 import { ReactNode } from "react";
 import Footer from "@/components/shared/Footer";
 import {Exo} from 'next/font/google';
-import '@fortawesome/fontawesome-svg-core/styles';
-import { config } from "@fortawesome/fontawesome-svg-core";
-import {Slide , ToastContainer} from "react-toastify"
-config.autoAddCss = false;
+import Providers from "@/components/providers/Providers";
+import "../lib/fontawesome"
+import { verifyToken } from "@/features/auth/server/auth.actions";
 const exo = Exo({
   subsets:["latin"],
   weight:["400","500","600","700","800","900"],
   variable: "--font-exo"
 })
-export default function RootLayout({children}:{children:ReactNode}) {
+export default async function RootLayout({children}:{children:ReactNode}) {
+  const authValues = await verifyToken();
   return (
     <html lang="en">
       <body className={`${exo.className}`}>
-        {/* Navbar */}
+       <Providers preloadedState={{auth: authValues}}>
+         {/* Navbar */}
           <Navbar/>
-
         {children}
-
         {/* Footer */}
         <Footer/>
-        <ToastContainer
-position="top-center"
-autoClose={1500}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick={false}
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="colored"
-transition={Slide}
-/>
+       </Providers>
       </body>
     </html>
   );

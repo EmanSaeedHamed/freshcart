@@ -5,7 +5,7 @@ import { faClock, faShieldHalved, faTruck } from "@fortawesome/free-solid-svg-ic
 export default function LoginHero() {
   return (
     <>
-      <Image className="rounded-2xl shadow-lg object-cover max-h-96" src={shopping} alt="shopping and sale image"/>
+      <Image loading="eager" className="rounded-2xl shadow-lg object-cover max-h-96" src={shopping} alt="shopping and sale image"/>
       <h2 className="text-center text-3xl font-bold">
         FreshCart - Your One-Stop Shop for Fresh Products
       </h2>

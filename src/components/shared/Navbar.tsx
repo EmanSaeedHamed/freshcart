@@ -7,8 +7,16 @@ import { usePathname } from "next/navigation";
 import navLogo from '../../assets/images/mini-logo.png';
 import Image from 'next/image';
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { AppState } from "@/store/store";
+import useLogout from "@/features/auth/hooks/useLogout";
+
 export default function Navbar() {
+  const {logout} = useLogout();
   const path = usePathname();
+  const {isAuthanticated} = useSelector(
+    (appState: AppState)=>appState.auth,
+  );
   const [openNavMenu , setOpenNavMenu] = useState(false);
   function toggleNavbarMenu (){
     setOpenNavMenu(!openNavMenu);
@@ -103,7 +111,11 @@ export default function Navbar() {
                  <span>Account</span>
               </Link>
             </li>
-            <li>
+            {isAuthanticated?<li onClick={logout} className="flex flex-col items-center hover:text-primary-600 transition-colors duration-200 cursor-pointer">
+              <FontAwesomeIcon className="text-xl" icon={faRightFromBracket} />
+              <span>Logout</span>
+            </li> : <>
+               <li>
               <Link className={`${path == "/signup" ? "text-primary-600" : ""} flex flex-col items-center hover:text-primary-600 transition-colors duration-200`} href={'/signup'}>
               <FontAwesomeIcon className="text-xl" icon={faUserPlus} />
                  <span>Sign up</span>
@@ -115,10 +127,7 @@ export default function Navbar() {
                  <span>Log in</span>
               </Link>
             </li>
-            <li className="flex flex-col items-center hover:text-primary-600 transition-colors duration-200 cursor-pointer">
-              <FontAwesomeIcon className="text-xl" icon={faRightFromBracket} />
-              <span>Logout</span>
-            </li>
+            </>}
           </ul>
 
           {/* menu button */}
@@ -250,7 +259,12 @@ export default function Navbar() {
               Account
             </h3>
             <ul className="space-y-1">
-              <li className="hover:bg-primary-100 p-1 transition-colors duration-200">
+              {isAuthanticated? <li onClick={logout} className="hover:bg-primary-100 p-1  flex gap-2 items-center hover:text-primary-600 transition-colors duration-200 cursor-pointer">
+              <FontAwesomeIcon className="size-4" icon={faRightFromBracket} />
+              <span>Logout</span>
+            </li>:
+                <>
+                      <li className="hover:bg-primary-100 p-1 transition-colors duration-200">
               <Link className={`${path == "/signup" ? "text-primary-600" : ""} flex gap-2 items-center hover:text-primary-600 transition-colors duration-200`} href={'/signup'}>
               <FontAwesomeIcon className="size-4" icon={faUserPlus} />
                  <span>Sign up</span>
@@ -262,10 +276,7 @@ export default function Navbar() {
                  <span>Log in</span>
               </Link>
             </li>
-            <li className="hover:bg-primary-100 p-1  flex gap-2 items-center hover:text-primary-600 transition-colors duration-200 cursor-pointer">
-              <FontAwesomeIcon className="size-4" icon={faRightFromBracket} />
-              <span>Logout</span>
-            </li>
+                </>}
             </ul>
           </div>
          </div>

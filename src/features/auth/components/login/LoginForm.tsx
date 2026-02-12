@@ -1,9 +1,57 @@
+'use client';
 import { faFacebookF, faGoogle, faXTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faLock, faSpinner, faStar, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { loginFormValues, loginSchema } from "../../schemas/login.schema";
+import loginAction from "../../server/login.actions";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { setToken } from "../../server/auth.actions";
+import { useDispatch } from "react-redux";
+import { setAuthInfo } from "../../store/auth.slice";
 
 export default function LoginForm() {
+    const dispatch = useDispatch();
+    const router = useRouter()
+    const {register,
+        handleSubmit,
+        setError,
+        formState: {errors, isSubmitting},
+    } = useForm<loginFormValues>({
+        defaultValues: {
+            email: "",
+            password: "",
+            rememberMe:false,
+        },
+         resolver: zodResolver(loginSchema),
+            mode:"onSubmit" ,
+            reValidateMode: "onChange",
+    });
+    const onSubmit:SubmitHandler<loginFormValues> = async(values)=>{
+          try {
+            const response = await loginAction(values);
+             console.log(response);
+             if(response?.success){
+                await setToken(response.data.token,values.rememberMe);
+                dispatch(setAuthInfo({
+                    isAuthanticated: true,
+                    userInfo: response.data.user,
+                }))
+                 toast.success(response.message);
+                 setTimeout(()=>{router.push("/");},2000)
+                }
+             if(response?.errors){
+                 Object.keys(response.errors).forEach((key)=>{
+                   setError(key as keyof loginFormValues,{message: response.errors[key],type: "server",})
+                 })
+                }
+          } catch (error) {
+            toast.error("something went wrong");
+          }
+    }
   return (
     <>
      <div className="text-center">
@@ -40,14 +88,14 @@ export default function LoginForm() {
       </div>
      </div>
      {/* form */}
-      <form className="space-y-5 mt-5">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 mt-5">
         {/* email */}
         <div className="flex flex-col">
           <label className="font-semibold" htmlFor="email">
             Email
           </label>
-          <input className="form-control" placeholder="emma@example.com" id="email" type="email" />
-          {/* {errors.email && <p className="text-red-500">{errors.email.message}</p>} */}
+          <input {...register("email")} className="form-control" placeholder="emma@example.com" id="email" type="email" />
+          {errors.email && <p className="text-red-500">{errors.email.message}</p>}
         </div>
         {/* password */}
         <div className="flex flex-col">
@@ -59,23 +107,23 @@ export default function LoginForm() {
              Forgot Password?
           </Link>
           </div>
-          <input className="form-control" placeholder="create a strong password" id="password" type="password" />
-          {/* {errors.password && <p className="text-red-500">{errors.password.message}</p>} */}
+          <input {...register("password")} className="form-control" placeholder="create a strong password" id="password" type="password" />
+          {errors.password && <p className="text-red-500">{errors.password.message}</p>}
         </div>
-        {/* Keep me signed in */}
+        {/* remember me */}
         <div>
           <div className="flex items-start gap-1">
-          <input type="checkbox" id="term" className="accent-primary-500 size-4 shrink-0 mt-1" />
+          <input {...register("rememberMe")} type="checkbox" id="term" className="accent-primary-500 size-4 shrink-0 mt-1" />
           <label htmlFor="term" className="space-x-1">
             Keep me signed in
           </label>
         </div>
-        {/* {errors.terms && <p className="text-red-500">{errors.terms.message}</p>} */}
+        {errors.rememberMe && <p className="text-red-500">{errors.rememberMe.message}</p>}
         </div>
         {/* Login btn */}
         <div className="flex justify-center">
-          <button disabled={false} type="submit" className="flex items-center justify-center gap-2 py-2.5 text-white bg-primary-500 hover:bg-primary-600/90 btn disabled:cursor-not-allowed disabled:bg-primary-600/90 w-full mb-3 shadow-lg">
-             {false? (<>
+          <button disabled={isSubmitting} type="submit" className="flex items-center justify-center gap-2 py-2.5 text-white bg-primary-500 hover:bg-primary-600/90 btn disabled:cursor-not-allowed disabled:bg-primary-600/90 w-full mb-3 shadow-lg">
+             {isSubmitting? (<>
                 <FontAwesomeIcon icon={faSpinner} spin />
              <span>Sign In</span>
              </>) : (<>
