@@ -19,7 +19,7 @@ export default function Slider() {
      loop={true}
      pagination={{clickable: true}}
   >
-    <SwiperSlide  className="pt-25 pl-10 pl-25 min-h-96 bg-[linear-gradient(rgba(0,100,0,0.3),rgba(0,100,0,0.6)),url('/3d-apple-illustration.jpg')]
+    <SwiperSlide  className="pt-25 pl-10 pl-25 min-h-96 bg-[linear-gradient(rgba(0,100,0,0.2),rgba(0,100,0,0.2)),url('/3d-apple-illustration.jpg')]
                 bg-cover
                 bg-center">
           <div className='flex flex-col gap-4'>
@@ -41,7 +41,7 @@ export default function Slider() {
     </SwiperSlide>
 
     <SwiperSlide  className="pt-25 pl-10 lg:pl-25 min-h-96   
-               bg-[linear-gradient(rgba(0,100,0,0.3),rgba(0,100,0,0.6)),url('/3d-apple-illustration.jpg')]
+               bg-[linear-gradient(rgba(0,100,0,0.2),rgba(0,100,0,0.2)),url('/3d-apple-illustration.jpg')]
                 bg-cover
                 bg-center">
           <div className='flex flex-col gap-4'>
@@ -63,7 +63,7 @@ export default function Slider() {
     </SwiperSlide>
 
     <SwiperSlide  className="pt-25 pl-10 lg:pl-25 min-h-96 
-                bg-[linear-gradient(rgba(0,100,0,0.3),rgba(0,100,0,0.6)),url('/3d-apple-illustration.jpg')]
+                bg-[linear-gradient(rgba(0,100,0,0.2),rgba(0,100,0,0.2)),url('/3d-apple-illustration.jpg')]
                 bg-cover
                 bg-center">
           <div className='flex flex-col gap-4'>
