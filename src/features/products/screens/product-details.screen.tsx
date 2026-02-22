@@ -1,3 +1,4 @@
+import ProductInfo from "../components/productDetails/ProductInfo";
 import { getProductById } from "../server/products.actions"
 
 export default async function ProductDetailsScreen({productId}:{productId: string}) {
@@ -5,6 +6,6 @@ export default async function ProductDetailsScreen({productId}:{productId: strin
     console.log(response);
     
   return <>
-  product-details.screen
+    <ProductInfo product={response.data} key={response.data._id}/>
   </>
 }
