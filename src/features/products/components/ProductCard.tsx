@@ -55,7 +55,7 @@ export default function ProductCard({ info }: { info: Product }) {
               ${price}
             </h4>
           )}
-          <div className="px-5 space-y-2 sm:flex justify-between items-center">
+          <div className="px-5 flex justify-between items-center">
             <div className="flex text-yellow-400">
               {[...Array(5)].map((_, index) => (
                 <FontAwesomeIcon
@@ -70,7 +70,7 @@ export default function ProductCard({ info }: { info: Product }) {
               ))}
             </div>
 
-            <div className="flex items-center justify-end gap-1">
+            <div className="flex items-center gap-1">
               <span>{ratingsAverage}</span>
               <span>({ratingsQuantity})</span>
             </div>
