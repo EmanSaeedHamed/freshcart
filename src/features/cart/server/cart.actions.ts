@@ -13,7 +13,7 @@ export async function addProductToCart({productId} : {productId: string}) :Promi
 
     try {
         const options:AxiosRequestConfig = {
-            url: "https://ecommerce.routemisr.com/api/v2/cart",
+            url: "https://ecommerce.routemisr.com/api/v1/cart",
             method: "POST",
             headers: {
                 token
@@ -40,7 +40,7 @@ export async function getUserCart() :Promise<CartResponse>{
 
     try {
         const options:AxiosRequestConfig = {
-            url: "https://ecommerce.routemisr.com/api/v2/cart",
+            url: "https://ecommerce.routemisr.com/api/v1/cart",
             method: "GET",
             headers: {
                 token
