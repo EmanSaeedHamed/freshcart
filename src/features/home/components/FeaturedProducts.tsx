@@ -1,8 +1,16 @@
+'use client';
 import ProductCard from "@/features/products/components/ProductCard";
 import { getProducts } from "@/features/products/server/products.actions"
+import { useQuery } from "@tanstack/react-query";
 
-export default async function FeaturedProducts() {
-    const response = await getProducts();
+export default function FeaturedProducts() {
+    // const response = await getProducts();
+     const {data} = useQuery({
+        queryKey: ["products"],
+        queryFn: getProducts,
+        staleTime: 99999,
+        gcTime:100000000
+      });
   return <>
      <section className="container py-12">
         {/* title */}
@@ -17,7 +25,7 @@ export default async function FeaturedProducts() {
 
                 {/* product card */}
                 
-                {response?.data.map((product)=> <ProductCard info={product} key={product._id}/>)}
+                {data?.data.map((product)=> <ProductCard info={product} key={product._id}/>)}
                 
 
             </div>

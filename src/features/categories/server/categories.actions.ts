@@ -1,4 +1,4 @@
-'use server';
+
 import axios, { AxiosRequestConfig } from "axios";
 import { CategoriesResponse } from "../types/category.types";
 

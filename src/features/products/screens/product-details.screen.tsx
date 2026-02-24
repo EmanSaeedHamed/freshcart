@@ -1,11 +1,20 @@
+'use client';
+import { useQuery } from "@tanstack/react-query";
 import ProductInfo from "../components/productDetails/ProductInfo";
 import { getProductById } from "../server/products.actions"
 
-export default async function ProductDetailsScreen({productId}:{productId: string}) {
-    const response = await getProductById({id: productId});
-    console.log(response);
+export default function ProductDetailsScreen({productId}:{productId: string}) {
+
+    const {data} = useQuery({
+        queryKey: ["productById", productId],
+        queryFn: () => getProductById({id: productId}),
+        staleTime: 99999,
+        gcTime:100000000
+      });
     
-  return <>
-    <ProductInfo product={response.data} key={response.data._id}/>
-  </>
+  if(!data) return null;
+
+  return (
+    <ProductInfo product={data.data} key={data.data._id}/>
+  )
 }

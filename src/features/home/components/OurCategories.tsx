@@ -1,11 +1,19 @@
+'use client';
 import { getAllCategories } from "@/features/categories/server/categories.actions";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import Image from "next/image";
+import { useQuery } from "@tanstack/react-query";
 
-export default async function OurCategories() {
-    const response = await getAllCategories();
+export default function OurCategories() {
+    const {data} = useQuery({
+        queryKey: ["categories"],
+        queryFn: getAllCategories,
+        staleTime: 99999,
+        gcTime:100000000
+      });
+    // const response = await getAllCategories();
   
 
   return <>
@@ -29,7 +37,7 @@ export default async function OurCategories() {
     {/* categories cards */}
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 pt-8">
         {
-            response?.data.map((card)=><div key={card._id} className="bg-primary-500 flex flex-col items-center justify-center gap-2 rounded-b-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer pb-5 overflow-hidden">
+            data?.data.map((card)=><div key={card._id} className="bg-primary-500 flex flex-col items-center justify-center gap-2 rounded-b-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer pb-5 overflow-hidden">
             <div className="relative w-full h-52 rounded-b-full bg-white">
                 <Image fill className="object-cover" src={card.image} alt="category item"/>
             </div>

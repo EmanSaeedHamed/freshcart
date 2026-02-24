@@ -4,7 +4,9 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faEye, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { Product } from "../types/products.types";
 import Link from "next/link";
-export default function ProductCard({ info }: { info: Product }) {
+import { toast } from "react-toastify";
+import { addProductToCart } from "@/features/cart/server/cart.actions";
+export default function ProductCard({ info }: { info: Product }){
   const {
     id,
     title,
@@ -17,6 +19,18 @@ export default function ProductCard({ info }: { info: Product }) {
   const discountPercentage = priceAfterDiscount
     ? Math.round(((price - priceAfterDiscount) / price) * 100)
     : 0;
+    const handleAddToCart = async ()=>{
+      try {
+        const response = await addProductToCart({productId: id});
+        if(response.status == "success"){
+          toast.success(response.message);
+          // ^todo: set cart info => slice
+        }
+      } catch (error) {
+        // todo errors
+        toast.error("failed to add product to cart");
+      }
+    }
 
   return (
     <>
@@ -93,6 +107,7 @@ export default function ProductCard({ info }: { info: Product }) {
             </button>
           </div>
           <button
+          onClick={handleAddToCart}
             type="button"
             className="mt-auto bg-yellow-400 text-white font-semibold text-md text-center py-2 w-full hover:bg-yellow-500"
           >

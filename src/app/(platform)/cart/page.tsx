@@ -1,9 +1,5 @@
+import CartScreen from "@/features/cart/screens/cart.screen";
+
 export default function page() {
-  return (
-      <>
-    <h2>
-        cart
-    </h2>
-    </>
-    )
+  return <CartScreen/>
 }
