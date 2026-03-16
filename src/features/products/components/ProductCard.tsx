@@ -6,7 +6,10 @@ import { Product } from "../types/products.types";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { addProductToCart } from "@/features/cart/server/cart.actions";
+import { setCartInfo } from "@/features/cart/store/cart.slice";
+import { useDispatch } from "react-redux";
 export default function ProductCard({ info }: { info: Product }){
+  const dispatch = useDispatch()
   const {
     id,
     title,
@@ -25,6 +28,7 @@ export default function ProductCard({ info }: { info: Product }){
         if(response.status == "success"){
           toast.success(response.message);
           // ^todo: set cart info => slice
+          dispatch(setCartInfo(response));
         }
       } catch (error) {
         // todo errors

@@ -1,9 +1,7 @@
+import CheckoutScreen from "@/features/checkout/screens/checkout.screen"
+
 export default function page() {
-  return (
-      <>
-    <h2>
-        checkout
-    </h2>
+  return <>
+        <CheckoutScreen/>
     </>
-    )
 }

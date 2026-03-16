@@ -29,7 +29,7 @@ export default function CartScreen() {
               </h1>
               <p className="text-gray-500 text-sm sm:text-base">
                 You have{" "}
-                <span className="text-primary-600 font-semibold">{numOfCartItems} items</span> in
+                <span className="text-primary-600 font-semibold">{numOfCartItems} {numOfCartItems > 1 ? "items" : "item"}</span> in
                 your cart
               </p>
             </div>
@@ -67,7 +67,7 @@ export default function CartScreen() {
                     Order Summary
                   </h2>
                   <p className="mt-1 text-xs text-gray-500">
-                    {numOfCartItems} items in your cart
+                    {numOfCartItems} {numOfCartItems > 1 ? "items" : "item"} in your cart
                   </p>
                 </div>
               </div>
@@ -88,7 +88,7 @@ export default function CartScreen() {
               {/* Price details */}
               <div className="space-y-3 text-sm">
                 <div className="flex items-center justify-between text-gray-600">
-                  <span>Subtotal ({numOfCartItems} items)</span>
+                  <span>Subtotal ({numOfCartItems} {numOfCartItems > 1 ? "items" : "item"})</span>
                   <span className="font-semibold text-gray-900">{totalCartPrice} EGP</span>
                 </div>
   
@@ -119,8 +119,10 @@ export default function CartScreen() {
                 type="button"
                 className="w-full rounded-xl bg-primary-600 py-3.5 text-sm font-semibold text-white hover:bg-primary-700 transition-colors flex items-center justify-center gap-2"
               >
-                <FontAwesomeIcon icon={faLock} className="text-base" />
-                <span>Secure Checkout</span>
+               <Link href={'/checkout'}>
+               <FontAwesomeIcon icon={faLock} className="text-base" />
+               <span>Secure Checkout</span>
+               </Link>
               </button>
   
               {/* Benefits */}

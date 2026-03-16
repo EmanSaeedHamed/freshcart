@@ -12,6 +12,7 @@ import { AppState } from "@/store/store";
 import useLogout from "@/features/auth/hooks/useLogout";
 
 export default function Navbar() {
+  const {numOfCartItems} = useSelector((state:AppState)=>state.cart);
   const {logout} = useLogout();
   const path = usePathname();
   const {isAuthanticated} = useSelector(
@@ -101,8 +102,8 @@ export default function Navbar() {
               <FontAwesomeIcon className="text-xl" icon={faCartShopping} />
                  <span>Cart</span>
               </Link>
-              <div className="flex justify-center items-center bg-primary-500 size-4 rounded-full absolute right-0 top-0 -translate-y-2">
-                <span className="text-white">3</span>
+              <div className="absolute -top-2.5 right-0 size-[17px] rounded-full bg-primary-600 text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-white">
+                <span>{numOfCartItems}</span>
               </div>
             </li>
             <li>
@@ -141,8 +142,8 @@ export default function Navbar() {
               <Link className={`${path == "/cart" ? "text-primary-600" : ""} hover:text-primary-600 transition-colors duration-200`} href={'/cart'}>
               <FontAwesomeIcon className="text-xl" icon={faCartShopping} />
               </Link>
-              <div className="flex justify-center items-center bg-primary-500 size-4 rounded-full absolute right-0 top-0 -translate-y-2">
-                <span className="text-white">3</span>
+              <div className="absolute -top-2.5 right-0 size-[17px] rounded-full bg-primary-600 text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-white">
+                <span>{numOfCartItems}</span>
               </div>
             </li>
               </ul>

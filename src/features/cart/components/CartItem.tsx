@@ -8,8 +8,31 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { CartItem as CartItemType} from "../types/cart.types";
 import { useState } from "react";
+import { removeProductFromCart, updateQuantityFromCart } from "../server/cart.actions";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { removeProduct, setCartInfo } from "../store/cart.slice";
 export default function CartItem({info}:{info:CartItemType}) {
+    const dispatch = useDispatch();
     const [count,setCount] = useState(1);
+   const handleRemove = async () => {
+       dispatch(removeProduct({ id: info.product._id }));
+       const response = await removeProductFromCart({ productId: info.product._id });
+       console.log(response);
+       toast.success("Item removed from cart");
+   }
+
+   const handleUpdate = async (newCount:number) =>{
+    try {
+    const response = await updateQuantityFromCart(info.product.id,newCount);
+    console.log(response);
+    dispatch(setCartInfo(response));
+    toast.success("Cart updated");
+    } catch (error) {
+        console.log(error);
+    }
+    
+   }
   return <div className="space-y-4">
   <div className="rounded-xl border border-gray-200 bg-white p-5 flex flex-col sm:flex-row gap-4 sm:items-center">
     <div className="flex items-center gap-4 flex-1">
@@ -41,22 +64,22 @@ export default function CartItem({info}:{info:CartItemType}) {
     <div className="flex sm:flex-col gap-4 sm:items-end justify-between sm:justify-between">
       <div className="flex items-center gap-3">
         <button
+        disabled={count == 1}
         onClick={()=>{
-            if(count != 1){
-              setCount(count -1)
-            }
+            handleUpdate(count - 1);
+            setCount(count - 1 );
            }}
           type="button"
-          className="w-9 h-9 rounded-md border border-gray-300 flex items-center justify-center text-gray-600 hover:bg-gray-100"
+          className="w-9 h-9 disabled:cursor-not-allowed rounded-md border border-gray-300 flex items-center justify-center text-gray-600 hover:bg-gray-100"
         >
           <FontAwesomeIcon icon={faMinus} />
         </button>
         <span className="min-w-6 text-center font-medium">{count}</span>
         <button
+        disabled={count == info.product.quantity}
          onClick={()=>{
-            if(count != info.product.quantity){
-              setCount(count +1)
-            }
+            handleUpdate(count + 1);
+            setCount(count + 1 );
            }}
           type="button"
           className="w-9 h-9 rounded-md border border-gray-300 flex items-center justify-center text-gray-600 hover:bg-gray-100"
@@ -69,6 +92,7 @@ export default function CartItem({info}:{info:CartItemType}) {
         <span className="text-sm text-gray-500">Total</span>
         <span className="font-semibold text-gray-900">{count * info.price} EGP</span>
         <button
+        onClick={handleRemove}
           type="button"
           className="w-9 h-9 rounded-md border border-red-100 text-red-500 hover:bg-red-50 flex items-center justify-center"
         >
