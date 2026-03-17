@@ -213,10 +213,10 @@ export default function Navbar() {
                 <Link className={`${path == "/cart" ? "text-primary-600" : ""} hover:text-primary-600 transition-colors duration-200`} href={'/cart'}>Recently Added</Link>
               </li>
               <li>
-                <Link className={`${path == "/products" ? "text-primary-600" : ""} hover:text-primary-600 transition-colors duration-200`} href={'/products'}>Featured Products</Link>
+                <Link className={`${path == "/" ? "text-primary-600" : ""} hover:text-primary-600 transition-colors duration-200`} href={'/products'}>Featured Products</Link>
               </li>
               <li>
-                <Link className={`${path == "/offers" ? "text-primary-600" : ""} hover:text-primary-600 transition-colors duration-200`} href={'/offers'}>Offers</Link>
+                <Link className={`${path == "/" ? "text-primary-600" : ""} hover:text-primary-600 transition-colors duration-200`} href={'/offers'}>Offers</Link>
               </li>
               <li>
                 <Link className={`${path == "/brands" ? "text-primary-600" : ""} hover:text-primary-600 transition-colors duration-200`} href={'/brands'}>Brands</Link>
