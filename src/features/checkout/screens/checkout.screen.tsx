@@ -67,7 +67,7 @@ export default function CheckoutScreen() {
                 dispatch(clearCart());
                 toast.success("order created succussfully");
                 reset();
-                setTimeout(()=>{router.push('/orders')},2000)
+                setTimeout(()=>{router.push('/')},2000)
             }
         } else{
             const response = await createOnlineOrder(cartId, values, location.origin);
