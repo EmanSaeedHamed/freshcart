@@ -45,7 +45,7 @@ export default function Navbar() {
 
           <ul className="flex gap-5 items-center">
             <li>
-              <Link className={`${path == "/orders" ? "text-primary-600" : ""} hover:text-primary-600 transition-colors duration-200`} href={'orders'}>
+              <Link className={`${path == "/allorders" ? "text-primary-600" : ""} hover:text-primary-600 transition-colors duration-200`} href={'allorders'}>
                 Track Order
               </Link>
             </li>
